@@ -1,0 +1,121 @@
+
+import React from "react";
+import { IndexLink, Link } from "react-router";
+
+export default class DropDown extends React.Component {
+  render () {
+    var categories = [
+      { title: "Home Care", path: 'prod_homecare'}
+      // "Home Care",
+      // "Infection Control",
+      // "Pharmaceutical",
+      // "First Aid"
+    ]
+    var cat_list = categories.map((info, i) => <li key={i}><Link to={ info.path }>{ info.title }</Link></li> );
+
+    return (
+      <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">Products <span class="caret"></span></a>
+        <ul class="dropdown-menu" aria-labelledby="themes">
+          { cat_list }
+        </ul>
+      </li>
+    );
+  }
+}
+export default class Nav extends React.Component {
+  constructor() {
+    super()
+    this.state = {
+      collapsed: true,
+      title: "MedTech"
+    };
+  }
+
+  toggleCollapse() {
+    const collapsed = !this.state.collapsed;
+    this.setState({collapsed});
+  }
+
+  render () {
+    console.log("Nav render");
+    const { location } = this.props;
+    const { collapsed } = this.state;
+
+    // const featuredClass = location.pathname === "/" ? "active" : "";
+    // const archivesClass = location.pathname.match(/^\/archives/) ? "active" : "";
+    // const settingsClass = location.pathname.match(/^\/settings/) ? "active" : "";
+    const navClass = collapsed ? "collapse" : "";
+    return (
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <Link to="/" class="navbar-brand">{ this.state.title }</Link>
+      <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <div class="navbar-collapse collapse" id="navbar-main">
+      <ul class="nav navbar-nav">
+
+        <DropDown/>
+        <li>
+        <form class="nav navbar-form" role="search">
+          <div class="input-group">
+              <input type="text" class="form-control" placeholder="Search" name="srch-term" id="srch-term"/>
+              <div class="input-group-btn">
+                  <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+              </div>
+          </div>
+        </form>
+        </li>
+      </ul>
+
+      <ul class="nav navbar-nav navbar-right">
+        <li><Link to="login">Login</Link></li>
+        <li><Link to="help">Help</Link> </li>
+      </ul>
+
+    </div>
+  </div>
+</nav>
+    )
+  }
+
+  other() {
+    return (
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" onClick={this.toggleCollapse.bind(this)} >
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <div class={"navbar-collapse " + navClass} id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li>
+          Products
+        </li>
+      </ul>
+      {/*<ul class="nav navbar-nav">
+        <li class={featuredClass}>
+          <IndexLink to="/" onClick={this.toggleCollapse.bind(this)}>Featured</IndexLink>
+        </li>
+        <li class={archivesClass}>
+          <Link to="archives" onClick={this.toggleCollapse.bind(this)}>Archives</Link>
+        </li>
+        <li class={settingsClass}>
+          <Link to="settings" onClick={this.toggleCollapse.bind(this)}>Blah blah</Link>
+        </li>
+      </ul>*/}
+    </div>
+  </div>
+</nav>
+    );
+  }
+}

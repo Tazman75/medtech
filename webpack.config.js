@@ -3,9 +3,10 @@ var webpack = require('webpack');
 var path = require('path');
 
 module.exports = {
-  context: path.join(__dirname, "src"),
+  context: path.join(__dirname, "csc394"),
   devtool: debug ? "inline-sourcemap" : null,
-  entry: "./js/client.js",
+  entry: './assets/js/client.js',
+
   module: {
     loaders: [
       {
@@ -20,8 +21,13 @@ module.exports = {
     ]
   },
   output: {
-    path: __dirname + "/src/",
-    filename: "client.min.js"
+    path: path.resolve('./csc394/assets/js/'),
+    filename: 'client.min.js'
+    // filename: '[name]-[hash].js'
+  },
+  resolve: {
+    modulesDirectories: ['node_modules'],
+    extensions: ['', '.js', '.jsx']
   },
   plugins: debug ? [] : [
     new webpack.optimize.DedupePlugin(),

@@ -3,7 +3,8 @@ var webpack = require('webpack');
 var path = require('path');
 
 module.exports = {
-  context: path.join(__dirname, "csc394"),
+  // context: path.join(__dirname, "csc394"),
+  context: __dirname,
   devtool: debug ? "inline-sourcemap" : null,
   entry: './assets/js/client.js',
 
@@ -21,7 +22,7 @@ module.exports = {
     ]
   },
   output: {
-    path: path.resolve('./csc394/assets/js/'),
+    path: path.resolve('./assets/'),
     filename: 'client.min.js'
     // filename: '[name]-[hash].js'
   },

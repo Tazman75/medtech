@@ -38,7 +38,6 @@ export default class Nav extends React.Component {
   }
 
   render () {
-    console.log("Nav render");
     const { location } = this.props;
     const { collapsed } = this.state;
 
@@ -74,8 +73,8 @@ export default class Nav extends React.Component {
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
-        <li><Link to="login">Login</Link></li>
-        <li><Link to="help">Help</Link> </li>
+        <li><Link to="login">Login <span class="glyphicon glyphicon-log-in"></span></Link></li>
+        <li><Link to="cart">Cart <span class="glyphicon glyphicon-shopping-cart"></span> </Link> </li>
       </ul>
 
     </div>

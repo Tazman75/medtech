@@ -1,21 +1,51 @@
 import React from "react";
+import { IndexLink, Link } from "react-router";
 
 export default class Product extends React.Component {
+  constructor() {
+    super();
+  }
+
   render () {
     var props = this.props;
-    return (
-      <div class="col-md-3 col-sm-6 hero-feature">
-          <div class="thumbnail">
-              <img src="http://placehold.it/800x500" alt=""/>
-              <div class="caption">
-                  <h3>{ props.label }</h3>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                  <p>
-                      <a href="#" class="btn btn-primary">Buy Now!</a> <a href="#" class="btn btn-default">More Info</a>
-                  </p>
-              </div>
-          </div>
-      </div>
-    );
+    var { id, product_name, description, cost,  manufacturer_url, render_type } = props;
+
+    switch(render_type) {
+      case "detail": {
+        return (
+        <div class="row">
+            <div class="col-lg-3 col-sm-6">
+              <img src="http://placehold.it/300x400" alt=""/>
+            </div>
+            <div class="col-lg-9 col-sm-3 caption" >
+                <h3>{ product_name }</h3>
+                <p>{ description }</p>
+            </div>
+            <div class="col-lg-3 col-sm-3">
+              <p>Price { cost }</p>
+              <div class="btn btn-primary">Add to Cart</div>
+
+            </div>
+        </div>
+        );
+      }
+      default: {
+        return (
+        <div class="col-lg-4 col-md-4 col-sm-6 hero-feature">
+            <div class="thumbnail">
+                <img src="http://placehold.it/800x500" alt=""/>
+                <div class="caption">
+                    <h3>{ product_name }</h3>
+                    <p>{ description }</p>
+                    <p>
+                        <Link to={ "/products/" + id } class="btn btn-primary">Buy Now!</Link>
+                        <a href={ manufacturer_url } class="btn btn-default">Manufacturer Info</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        );
+      }
+    }
   }
 }

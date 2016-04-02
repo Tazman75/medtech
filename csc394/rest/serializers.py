@@ -18,7 +18,7 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
 class ProductSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Product
-        fields = ('url', 'name', 'description', 'cost')
+        fields = ('id', 'url', 'product_name', 'description', 'cost', 'manufacturer_url')
 
 
 class EvaluationSerializer(serializers.HyperlinkedModelSerializer):

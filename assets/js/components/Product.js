@@ -33,13 +33,15 @@ export default class Product extends React.Component {
         return (
         <div class="col-lg-4 col-md-5 col-sm-6 hero-feature">
             <div class="thumbnail">
-                <img src="http://placehold.it/800x500" alt=""/>
+                <Link to={ "/products/" + id }>
+                  <img src="http://placehold.it/800x500" alt=""/>
+                </Link>
                 <div class="caption">
                     <h3>{ product_name }</h3>
                     <p>{ description }</p>
                     <p>
-                        <Link to={ "/products/" + id } class="btn btn-primary">Buy Now!</Link>
-                        <a href={ manufacturer_url } class="btn btn-default">Manufacturer Info</a>
+                        <Link to={ "/products/" + id } class="btn btn-primary">Add to Cart</Link>
+                        <a href={ manufacturer_url } class="btn btn-default" target="_blank">Manufacturer Info</a>
                     </p>
                 </div>
             </div>

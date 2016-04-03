@@ -2,15 +2,19 @@
 import axios from "axios";
 import Reflux from "reflux";
 
-var EntryActions = Reflux.createActions([
-  "PRODUCT_CREATE",
-  "PRODUCT_UPDATE",
-  "PRODUCT_DESTROY"
-]);
-
+var ProductActions = Reflux.createActions({
+  productUpdate: {
+    asyncResult: true,
+    children: ["progressed"]
+  },
+});
 
 export function reloadProducts() {
   axios("/rest/product/").then((data) => {
-    // dispatcher.dispatch({type: "RECEIVE_PRODUCTS", products: data.data})
+    console.log("reload");
+
+    ProductActions.productUpdate.completed(data.data);
   });
 }
+
+export default ProductActions;

@@ -3,34 +3,35 @@ import React from "react";
 
 import FeaturedProducts from "../components/FeaturedProducts";
 import ProductStore from "../stores/ProductStore";
-import * as ProductActions from "../actions/ProductActions";
+import * as PA from "../actions/ProductActions";
 
 export default class Featured extends React.Component {
   constructor() {
     super();
     this.getProducts = this.getProducts.bind(this);
     this.state = {
-      products: ProductStore.getAll(),
+      products: ProductStore.getProducts(),
     };
     this.refreshProducts();
   }
 
   getProducts() {
     this.setState({
-      products: ProductStore.getAll(),
+      products: ProductStore.getProducts(),
     });
   }
 
   refreshProducts() {
-    ProductActions.reloadProducts();
+    PA.reloadProducts();
   }
 
   componentWillMount() {
-    ProductStore.on("change", this.getProducts);
+    this.getProducts();
+    ProductStore.listen((status) => this.getProducts());
   }
 
   componentWillUnmount() {
-    ProductStore.removeListener("change", this.getProducts);
+    ProductStore.stopListeningToAll();
   }
 
   render() {

@@ -1,43 +1,29 @@
+import Reflux from "reflux";
+import ProductActions from "../actions/ProductActions";
 
-import { EventEmitter } from "events";
-
-import dispatcher from "../dispatcher";
-
-class ProductStore extends EventEmitter {
-  constructor() {
-    super()
-    this.products = [
-    ];
-  }
-
-  getAll() {
-    return this.products;
-  }
-
-  getProduct(product_id) {
-    var filterProducts = this.products.filter((i) => { return i.id == product_id});
-    return filterProducts[0];
-  }
-
-  handleActions(action) {
-    switch(action.type) {
-      case "CREATE_PRODUCT": {
-        this.createTodo(action.text);
-        break;
-      }
-      case "RECEIVE_PRODUCTS": {
-        this.products = action.products;
-        this.emit("change");
-        break;
-      }
+var _state = {
+  products: []
+};
+var ProductStore = Reflux.createStore({
+    listenables: ProductActions,
+    onProductUpdate: function() {
+    },
+    onProductUpdateFailed: function() {
+      console.warn("Failed Update");
+    },
+    onProductUpdateCompleted: function(products) {
+      _state['products'] = products;
+      this.trigger("COMPLETED");
+    },
+    onProductUpdateProgressed: function() {
+    },
+    getProducts: function() {
+      return _state['products'];
+    },
+    getProduct: function(product_id) {
+      var filterProducts = _state['products'].filter((i) => { return i.id == product_id});
+      return filterProducts[0];
     }
-  }
-}
+});
 
-const productStore = new ProductStore;
-dispatcher.register(productStore.handleActions.bind(productStore));
-
-// window.dispatcher = dispatcher;
-// window.productStore = productStore;
-
-export default productStore;
+export default ProductStore;

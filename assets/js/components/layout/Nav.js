@@ -60,19 +60,10 @@ export default class Nav extends React.Component {
       <ul class="nav navbar-nav">
 
         <DropDown/>
-        <li>
-        <form class="nav navbar-form" role="search">
-          <div class="input-group">
-              <input type="text" class="form-control" placeholder="Search" name="srch-term" id="srch-term"/>
-              <div class="input-group-btn">
-                  <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
-              </div>
-          </div>
-        </form>
-        </li>
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
+        <li><Link to="test">Test</Link></li>
         <li><Link to="login">Login <span class="glyphicon glyphicon-log-in"></span></Link></li>
         <li><Link to="cart">Cart <span class="glyphicon glyphicon-shopping-cart"></span> </Link> </li>
       </ul>

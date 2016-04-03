@@ -1,16 +1,56 @@
 import React from "react";
+import Reflux from "reflux";
+import Promise from "bluebird";
+
+var ProductActions = Reflux.createActions({
+  statusUpdate: {
+    asyncResult: true,
+    children: ["progressed"]
+  },
+});
+
+var _state = {};
+var productStore = Reflux.createStore({
+    listenables: ProductActions,
+    onStatusUpdate: function() {
+      console.log("STATUS");
+    },
+    onStatusUpdateFailed: function() {
+      console.log("FAILED");
+    },
+    onStatusUpdateCompleted: function() {
+      console.log("COMPLETED");
+      _state['status'] = "COMPLETED";
+      this.trigger("COMPLETED");
+    },
+    onStatusUpdateProgressed: function() {
+      console.log("PROGRESSED");
+    },
+    getState: function() {
+      return _state;
+    }
+});
+
+window.Promise = Promise;
+window.Reflux = Reflux;
+window.ProductActions = ProductActions;
+window.productStore = productStore;
 
 export default class Test extends React.Component {
-  render () {
-    var PRODUCTS = [
-      {category: 'Sporting Goods', price: '$49.99', stocked: true, name: 'Football'},
-      {category: 'Sporting Goods', price: '$9.99', stocked: true, name: 'Baseball'},
-      {category: 'Sporting Goods', price: '$29.99', stocked: false, name: 'Basketball'},
-      {category: 'Electronics', price: '$99.99', stocked: true, name: 'iPod Touch'},
-      {category: 'Electronics', price: '$399.99', stocked: false, name: 'iPhone 5'},
-      {category: 'Electronics', price: '$199.99', stocked: true, name: 'Nexus 7'}
-    ];
+  binder(...methods) { methods.forEach( (method) => this[method] = this[method].bind(this) ); }
 
+  constructor() {
+    super();
+  }
+
+  componentWillMount() {
+    productStore.listen(function(status) {
+      let state = productStore.getState()
+      console.log('status: ', state);
+    });
+  }
+
+  render () {
     return (
       <div>Test</div>
     );

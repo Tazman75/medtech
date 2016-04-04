@@ -9,8 +9,9 @@ export default class Featured extends React.Component {
   constructor() {
     super();
     this.getProducts = this.getProducts.bind(this);
+    const products = ProductStore.getProducts();
     this.state = {
-      products: ProductStore.getProducts(),
+      products: products,
     };
     this.refreshProducts();
   }

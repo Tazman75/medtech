@@ -36,7 +36,7 @@ import Product from "../components/Product";
 
 class ProductTable extends React.Component {
   render () {
-    const { products, filterText } = this.props;
+    const { products, filterText, limit } = this.props;
     if (products.length == 0) {
       return (
         <div/>
@@ -45,6 +45,7 @@ class ProductTable extends React.Component {
 
     var ProductComponent = products
       .filter( product => product.product_name.indexOf(filterText) >= 0)
+      .slice(0,limit)
       .map(product => <Product key={product.id} render_type="spot" {...product}/>);
 
     return (
@@ -60,6 +61,7 @@ export default class FeaturedProducts extends React.Component {
     super()
     this.state = {
       filterText: '',
+      limit: 20,
     };
   }
 
@@ -91,6 +93,7 @@ export default class FeaturedProducts extends React.Component {
   <ProductTable
     products={this.props.products}
     filterText={this.state.filterText}
+    limit={this.state.limit}
   />
 </div>
     );

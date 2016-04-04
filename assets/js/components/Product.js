@@ -31,7 +31,7 @@ export default class Product extends React.Component {
       }
       default: {
         return (
-        <div class="col-lg-4 col-md-5 col-sm-6 hero-feature">
+        <div class="col-md-5 col-sm-6 hero-feature">
             <div class="thumbnail">
                 <Link to={ "/products/" + id }>
                   <img src="http://placehold.it/800x500" alt=""/>

@@ -13,7 +13,7 @@ var ProductStore = Reflux.createStore({
     },
     onProductUpdateCompleted: function(products) {
       _state['products'] = products;
-      this.trigger("COMPLETED");
+      this.trigger("completed");
     },
     onProductUpdateProgressed: function() {
     },

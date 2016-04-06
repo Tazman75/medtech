@@ -1,9 +1,10 @@
 import React from "react";
-import BasicInput from "../components/BasicInput"
+import BasicInput from "../components/BasicInput";
+
 
 export default class Login extends React.Component {
   login() {
-    console.log('login');
+
   }
   render () {
     return (

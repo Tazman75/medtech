@@ -1,18 +1,18 @@
-import React from "react"
-import ReactDOM from "react-dom"
-import Layout from "./pages/Layout"
+import React from "react";
+import ReactDOM from "react-dom";
+import Layout from "./pages/Layout";
 
-import Featured from "./pages/Featured"
-import Login from "./pages/Login"
-import Cart from "./pages/Cart"
+import Featured from "./pages/Featured";
+import Login from "./pages/Login";
+import Cart from "./pages/Cart";
 
-import ViewProduct from "./pages/ViewProduct"
-import HomeCare from "./pages/products/HomeCare"
-import Test from "./pages/Test"
+import ViewProduct from "./pages/ViewProduct";
+import HomeCare from "./pages/products/HomeCare";
+import Test from "./pages/Test";
 
 import { Router, Route, IndexRoute, hashHistory } from "react-router";
 
-const app = document.getElementById('app');
+const app = document.getElementById("app");
 // ReactDOM.render(<Layout/>, app);
 
 ReactDOM.render(

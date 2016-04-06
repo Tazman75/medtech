@@ -5,12 +5,8 @@ import { IndexLink, Link } from "react-router";
 export default class DropDown extends React.Component {
   render () {
     var categories = [
-      { title: "Home Care", path: 'prod_homecare'}
-      // "Home Care",
-      // "Infection Control",
-      // "Pharmaceutical",
-      // "First Aid"
-    ]
+      { title: "Home Care", path: "prod_homecare"}
+    ];
     var cat_list = categories.map((info, i) => <li key={i}><Link to={ info.path }>{ info.title }</Link></li> );
 
     return (
@@ -25,7 +21,7 @@ export default class DropDown extends React.Component {
 }
 export default class Nav extends React.Component {
   constructor() {
-    super()
+    super();
     this.state = {
       collapsed: true,
       title: "MedTech"
@@ -71,7 +67,7 @@ export default class Nav extends React.Component {
     </div>
   </div>
 </nav>
-    )
+    );
   }
 
   other() {

@@ -1,7 +1,8 @@
 
 import React from "react";
 
-import FeaturedProducts from "../components/FeaturedProducts";
+import Feature from "../components/Feature";
+import ProductsListing from "../components/ProductsListing";
 import ProductStore from "../stores/ProductStore";
 import * as PA from "../actions/ProductActions";
 
@@ -11,14 +12,14 @@ export default class Featured extends React.Component {
     this.getProducts = this.getProducts.bind(this);
     const products = ProductStore.getProducts();
     this.state = {
-      products: products,
+      products: products
     };
     this.refreshProducts();
   }
 
   getProducts() {
     this.setState({
-      products: ProductStore.getProducts(),
+      products: ProductStore.getProducts()
     });
   }
 
@@ -36,10 +37,17 @@ export default class Featured extends React.Component {
   }
 
   render() {
+    var feature = {
+      title: "Special Product!",
+      description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa, ipsam, eligendi, in quo sunt possimus non incidunt odit vero aliquid similique quaerat nam nobis illo aspernatur vitae fugiat numquam repellat."
+    };
     const { products } = this.state;
 
     return (
-      <FeaturedProducts products={products}/>
+      <div>
+        <Feature {...feature}/>
+        <ProductsListing products={products}/>
+      </div>
     );
   }
 }

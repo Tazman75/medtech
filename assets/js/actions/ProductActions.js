@@ -6,13 +6,11 @@ var ProductActions = Reflux.createActions({
   productUpdate: {
     asyncResult: true,
     children: ["progressed"]
-  },
+  }
 });
 
 export function reloadProducts() {
   axios("/rest/product/").then((data) => {
-    console.log("reload");
-
     ProductActions.productUpdate.completed(data.data);
   });
 }

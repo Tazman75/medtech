@@ -13,7 +13,7 @@ export default class Test extends React.Component {
 
   componentWillMount() {
     ProductStore.listen(function(status) {
-      let state = ProductStore.getProducts()
+      let state = ProductStore.getProducts();
     });
     PA.reloadProducts();
   }

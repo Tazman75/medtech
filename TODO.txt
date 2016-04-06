@@ -1,0 +1,12 @@
+User Interface Mock
+* Categories/SubCategories mock views
+* Shopping Cart
+* Chat on product
+* Administrative Functionality
+  * Add Product
+  * Respond to Questions
+
+
+Data model
+* Mock data
+*

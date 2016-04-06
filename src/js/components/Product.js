@@ -3,16 +3,16 @@ import { IndexLink, Link } from "react-router";
 
 export default class Product extends React.Component {
   constructor() {
-  	super();
+    super();
   }
 
-  	render () {
-    	var props = this.props;
-    	var { id, product_name, description, cost,  manufacturer_url, render_type } = props;
+  render () {
+    var props = this.props;
+    var { id, product_name, description, cost,  manufacturer_url, render_type } = props;
 
-    	switch(render_type) {
-      case "detail": {
-        	return (
+    switch(render_type) {
+    case "detail": {
+      return (
         <div class="row">
             <div class="col-lg-3 col-sm-6">
               <img src="http://placehold.it/300x400" alt=""/>
@@ -28,9 +28,9 @@ export default class Product extends React.Component {
             </div>
         </div>
         );
-      }
-      default: {
-        	return (
+    }
+    default: {
+      return (
         <div class="col-md-5 col-sm-6 hero-feature">
             <div class="thumbnail">
                 <Link to={ "/products/" + id }>
@@ -47,7 +47,7 @@ export default class Product extends React.Component {
             </div>
         </div>
         );
-      }
+    }
     }
   }
 }

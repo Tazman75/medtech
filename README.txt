@@ -1,3 +1,11 @@
-pip install djangorestframework
-pip install markdown       # Markdown support for the browsable API.
-pip install django-filter
+Adding fields
+
+Add the structure to models.py
+
+create a migration
+python manage.py makemigrations csc394
+
+migrate
+python manage.py migrate
+
+update serializers, views, and urls

@@ -16,14 +16,25 @@ class MessageThread(models.Model):
     product = models.ForeignKey('Product', on_delete=models.CASCADE)
     name = models.CharField(max_length=50)
 
+    def __str__(self):
+        return self.name
+
 class Message(models.Model):
     thread = models.ForeignKey(MessageThread, on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(User, unique=True)
+    note = models.CharField(max_length=250)
+
+    def __str__(self):
+        return self.note
+
 
 class ProductGroup(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     name = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.name
 
 class Product(models.Model):
     created = models.DateTimeField(auto_now_add=True)
@@ -34,7 +45,7 @@ class Product(models.Model):
     manufacturer_url = models.URLField(blank=True)
 
     def __str__(self):
-        return self.product_name
+        return self.name
 
 class UserStory(models.Model):
     product = models.ForeignKey('Product', on_delete=models.CASCADE)

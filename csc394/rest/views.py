@@ -51,7 +51,7 @@ class ProductGroupViewSet(viewsets.ModelViewSet):
     API endpoint that allows groups to be viewed or edited.
     """
     queryset = md.ProductGroup.objects.all()
-    serializer_class = sz.MessageSerializer
+    serializer_class = sz.ProductGroupSerializer
 
 
 class ProductViewSet(viewsets.ModelViewSet):

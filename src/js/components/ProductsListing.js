@@ -44,7 +44,7 @@ class ProductTable extends React.Component {
     }
 
     var ProductComponent = products
-      .filter( product => product.product_name.indexOf(filterText) >= 0)
+      .filter( product => product.name.indexOf(filterText) >= 0)
       .slice(0,limit)
       .map(product => <Product key={product.id} render_type="spot" {...product}/>);
 

@@ -8,7 +8,7 @@ export default class Product extends React.Component {
 
   render () {
     var props = this.props;
-    var { id, product_name, description, cost,  manufacturer_url, render_type } = props;
+    var { id, name, description, cost,  manufacturer_url, render_type } = props;
 
     switch(render_type) {
     case "detail": {
@@ -18,7 +18,7 @@ export default class Product extends React.Component {
               <img src="http://placehold.it/300x400" alt=""/>
             </div>
             <div class="col-lg-9 col-sm-3 caption" >
-                <h3>{ product_name }</h3>
+                <h3>{ name }</h3>
                 <p>{ description }</p>
             </div>
             <div class="col-lg-3 col-sm-3">
@@ -37,7 +37,7 @@ export default class Product extends React.Component {
                   <img src="http://placehold.it/800x500" alt=""/>
                 </Link>
                 <div class="caption">
-                    <h3>{ product_name }</h3>
+                    <h3>{ name }</h3>
                     <p>{ description }</p>
                     <p>
                         <Link to={ "/products/" + id } class="btn btn-primary">Add to Cart</Link>

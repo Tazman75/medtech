@@ -36,13 +36,13 @@ class MessageSerializer(serializers.HyperlinkedModelSerializer):
 class ProductGroupSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = md.ProductGroup
-        fields = ('name')
+        fields = ('name', )
 
 
 class ProductSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = md.Product
-        fields = ('product_group', 'url', 'name', 'description', 'cost', 'manufacturer_url')
+        fields = ('id', 'product_group', 'url', 'name', 'description', 'cost', 'manufacturer_url')
 
 
 class UserStorySerializer(serializers.HyperlinkedModelSerializer):

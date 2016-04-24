@@ -39,6 +39,9 @@ router.register(r'evaluation', views.EvaluationViewSet)
 urlpatterns = [
     url(r'^$', TemplateView.as_view(template_name='index.html'), name="home"),
     url(r'^rest/', include(router.urls)),
-    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    url(r'^login/$', views.LoginView.as_view(), name='rest_login'),
+    url(r'^logout/$', views.LogoutView.as_view(), name='rest_logout'),
+    # url(r'^rest-auth/', include('rest_auth.urls')),
+    # url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]
 # urlpatterns.append(static(settings.STATIC_URL, document_root=settings.STATIC_ROOT))

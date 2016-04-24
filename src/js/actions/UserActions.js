@@ -5,6 +5,10 @@ var UserActions = Reflux.createActions({
   createUser: {
     children: ["completed","failed"],
     asyncResult: false
+  },
+  loginUser: {
+    children: ["completed","failed"],
+    asyncResult: false
   }
 });
 
@@ -15,6 +19,20 @@ export function createUser(userData) {
     UserActions.createUser.completed(data);
   }).catch(function (response) {
     UserActions.createUser.failed({
+      status: response.status,
+      statusText: response.statusText
+    });
+  });
+}
+
+export function loginUser(userData) {
+  axios.post("/login/",
+    userData
+  ).then((data) => {
+    UserActions.loginUser.completed(data);
+  }).catch(function (response) {
+    console.log(response);
+    UserActions.loginUser.failed({
       status: response.status,
       statusText: response.statusText
     });

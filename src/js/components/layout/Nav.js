@@ -1,34 +1,8 @@
 
 import React from "react";
 import { IndexLink, Link } from "react-router";
+import Login from "../Login";
 
-class Login extends React.Component {
-  constructor() {
-    super();
-    this.handleUser = this.handleUser.bind(this);
-
-  }
-  handleUser() {
-    let { username } = this.refs;
-    console.info(username.value);
-  }
-  handlePassword() {
-    let { password } = this.refs;
-    console.info(password.value);
-  }
-  render() {
-    return(
-    <form class="navbar-form form-inline" role="form">
-      <div>
-        <input type="text" placeholder="Username.." ref="username" onChange={this.handleUser} value={this.props.username}></input>
-        <input type="text" placeholder="Password.." ref="password" onChange={this.handlePass} value={this.props.password}></input>
-        <button type='submit' class='btn btn-primary'>Login</button>
-      </div>
-    </form>
-  );
-  }
-
-}
 
 export default class DropDown extends React.Component {
   render () {

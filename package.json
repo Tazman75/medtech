@@ -4,6 +4,7 @@
   "description": "",
   "main": "webpack.config.js",
   "dependencies": {
+    "atomic-form": "^0.1.5",
     "axios": "^0.9.1",
     "babel-loader": "^6.2.0",
     "babel-plugin-add-module-exports": "^0.1.2",

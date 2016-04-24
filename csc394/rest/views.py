@@ -1,6 +1,7 @@
 from django.shortcuts import render
 
 from django.contrib.auth.models import User, Group
+from rest_framework import permissions
 from rest_framework import viewsets
 import csc394.rest.models as md
 import csc394.rest.serializers as sz
@@ -12,6 +13,8 @@ class UserViewSet(viewsets.ModelViewSet):
     """
     queryset = md.User.objects.all().order_by('-date_joined')
     serializer_class = sz.UserSerializer
+
+    permission_classes = (permissions.AllowAny, )
 
 
 class GroupViewSet(viewsets.ModelViewSet):
@@ -28,6 +31,7 @@ class CompanyViewSet(viewsets.ModelViewSet):
     """
     queryset = md.Company.objects.all()
     serializer_class = sz.CompanySerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly, )
 
 
 class MessageThreadViewSet(viewsets.ModelViewSet):
@@ -53,6 +57,7 @@ class ProductGroupViewSet(viewsets.ModelViewSet):
     queryset = md.ProductGroup.objects.all()
     serializer_class = sz.ProductGroupSerializer
 
+    permission_classes = (permissions.IsAdminUser, )
 
 class ProductViewSet(viewsets.ModelViewSet):
     """

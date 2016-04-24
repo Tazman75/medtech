@@ -1,6 +1,7 @@
 import React from "react";
 import Reflux from "reflux";
 import Promise from "bluebird";
+import Registration from "../components/Registration";
 import * as PA from "../actions/ProductActions";
 import ProductStore from "../stores/ProductStore";
 
@@ -20,7 +21,8 @@ export default class Test extends React.Component {
 
   render () {
     return (
-      <div>Test</div>
+      <Registration/>
+      // <div>Test</div>
     );
   }
 }

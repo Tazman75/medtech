@@ -1,15 +1,31 @@
 import Reflux from "reflux";
 import ProductActions from "../actions/ProductActions";
+import UserStore from "./UserStore";
+import * as PA from "../actions/ProductActions";
 
 var _state = {
   products: []
 };
 var ProductStore = Reflux.createStore({
   listenables: ProductActions,
+  init: function() {
+    console.log('init');
+    UserStore.listen((status) => {
+      switch(status) {
+      case "ONLOGINUSER_SUCCESS":
+        PA.reloadProducts();
+        break;
+      case "ONLOGOUTUSER_SUCCESS":
+        PA.reloadProducts();
+        break;
+      }
+    });
+  },
   onProductUpdate: function() {
   },
   onProductUpdateFailed: function() {
-    // console.warn("Failed Update");
+    _state["products"] = [];
+    this.trigger("PRODUCTUPDATE_FAILED");
   },
   onProductUpdateCompleted: function(products) {
     _state["products"] = products;

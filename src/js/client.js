@@ -6,6 +6,7 @@ import Featured from "./pages/Featured";
 
 import ViewProduct from "./pages/ViewProduct";
 import HomeCare from "./pages/products/HomeCare";
+import Register from "./pages/Register";
 import Test from "./pages/Test";
 
 import { Router, Route, IndexRoute, hashHistory } from "react-router";
@@ -19,6 +20,7 @@ ReactDOM.render(
       <IndexRoute component={Featured}></IndexRoute>
       <Route path="products/:product_id" name="products" component={ViewProduct}></Route>
       <Route path="prod_homecare" name="prod_homecare" component={HomeCare}></Route>
+      <Route path="register" name="register" component={Register}></Route>
       <Route path="test" name="test" component={Test}></Route>
     </Route>
   </Router>,

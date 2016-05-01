@@ -4,54 +4,57 @@ import cookie from "react-cookie";
 import reactMixin from "react-mixin";
 var LinkedStateMixin = require("react-addons-linked-state-mixin");
 import * as UA from "../actions/UserActions";
+import UserStore from "../stores/UserStore";
+import { Link } from "react-router";
 
 export default class Login extends React.Component {
   constructor() {
     super();
     this.login = this.login.bind(this);
     this.logout = this.logout.bind(this);
-    this.state = this.getState();
-  }
+    this.register = this.register.bind(this);
 
-  getState() {
-    let state = {
-      username: cookie.load("username"),
-      password: "",
-      logged: false
-    };
-    if (state.username != "") {
-      state.logged = true;
+    this.state = {};
+    let token = cookie.load("token");
+    if ( token === "undefined") {
+      this.state.login = 0;
+    } else {
+      this.state.login = 1;
     }
-    return state;
+  }
+  componentWillMount() {
+    UserStore.listen((status) => {
+      switch(status) {
+      case "ONLOGINUSER_SUCCESS":
+        this.setState({login: 1});
+        break;
+      case "ONLOGOUTUSER_SUCCESS":
+        this.state.username = "";
+        this.state.password = "";
+        this.setState({
+          login: 0
+        });
+        break;
+      }
+    });
   }
 
   login() {
-    // UA.loginUser(this.state);
-    cookie.save("username", this.state.username, { path: "/" });
-    // this.setState(
-    //   update(this.state, {
-    //     logged: {$set: true}
-    //   })
-    // );
     UA.loginUser({
       username: this.state.username,
       password: this.state.password
     });
-
   }
 
   logout() {
-    console.log("Logout");
-    cookie.remove("username", { path: "/" });
-    this.setState(
-      update(this.state, {
-        logged: {$set: false}
-      })
-    );
+    UA.logoutUser();
+  }
+
+  register() {
   }
 
   render() {
-    if (this.state.logged != "") {
+    if (this.state.login == 1) {
       return (
         <div class="navbar-form">
           <label class="control-label">Logged In:</label>
@@ -60,13 +63,16 @@ export default class Login extends React.Component {
         </div>);
     }
     return(
-      <form class="navbar-form form-inline" role="form" onSubmit={this.login}>
-        <div>
-          <input valueLink={this.linkState("username")} type="text" placeholder="Username.."></input>
-          <input valueLink={this.linkState("password")} type="text" placeholder="Password.." type="password"></input>
-          <button type='submit' class='btn btn-primary'>Login</button>
-        </div>
-      </form>
+      <div>
+        <form class="navbar-form form-inline" role="form" onSubmit={ this.login }>
+          <div>
+            <input valueLink={this.linkState("username")} type="text" placeholder="Username.." size="15"></input>
+            <input valueLink={this.linkState("password")} type="text" placeholder="Password.." size="10" type="password"></input>
+            <button type='submit' class='btn btn-primary'>Login</button>
+            <Link class='btn btn-primary' to="/register" >Reg</Link>
+          </div>
+        </form>
+      </div>
     );
   }
 }

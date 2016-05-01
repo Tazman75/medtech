@@ -133,7 +133,6 @@ class GroupViewSet(viewsets.ModelViewSet):
     """
     queryset = md.Group.objects.all()
     serializer_class = sz.GroupSerializer
-    authentication_classes = (CsrfExemptSessionAuthentication, BasicAuthentication)
 
 
 class CompanyViewSet(viewsets.ModelViewSet):
@@ -142,7 +141,6 @@ class CompanyViewSet(viewsets.ModelViewSet):
     """
     queryset = md.Company.objects.all()
     serializer_class = sz.CompanySerializer
-    authentication_classes = (CsrfExemptSessionAuthentication, BasicAuthentication)
 
 
 class MessageThreadViewSet(viewsets.ModelViewSet):
@@ -151,7 +149,6 @@ class MessageThreadViewSet(viewsets.ModelViewSet):
     """
     queryset = md.Group.objects.all()
     serializer_class = sz.MessageThreadSerializer
-    authentication_classes = (CsrfExemptSessionAuthentication, BasicAuthentication)
 
 
 class MessageViewSet(viewsets.ModelViewSet):
@@ -160,7 +157,6 @@ class MessageViewSet(viewsets.ModelViewSet):
     """
     queryset = md.Message.objects.all()
     serializer_class = sz.MessageSerializer
-    authentication_classes = (CsrfExemptSessionAuthentication, BasicAuthentication)
 
 
 class ProductGroupViewSet(viewsets.ModelViewSet):
@@ -171,7 +167,6 @@ class ProductGroupViewSet(viewsets.ModelViewSet):
     serializer_class = sz.ProductGroupSerializer
 
     permission_classes = (permissions.IsAdminUser, )
-    authentication_classes = (CsrfExemptSessionAuthentication, BasicAuthentication)
 
 class ProductViewSet(viewsets.ModelViewSet):
     """
@@ -179,8 +174,7 @@ class ProductViewSet(viewsets.ModelViewSet):
     """
     queryset = md.Product.objects.all()
     serializer_class = sz.ProductSerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly, )
-    authentication_classes = (CsrfExemptSessionAuthentication, BasicAuthentication)
+    # permission_classes = (permissions.IsAuthenticatedOrReadOnly, )
 
 
 class UserStoryViewSet(viewsets.ModelViewSet):
@@ -189,7 +183,6 @@ class UserStoryViewSet(viewsets.ModelViewSet):
     """
     queryset = md.UserStory.objects.all()
     serializer_class = sz.UserStorySerializer
-    authentication_classes = (CsrfExemptSessionAuthentication, BasicAuthentication)
 
 
 class EvaluationViewSet(viewsets.ModelViewSet):
@@ -198,4 +191,3 @@ class EvaluationViewSet(viewsets.ModelViewSet):
     """
     queryset = md.Evaluation.objects.all()
     serializer_class = sz.EvaluationSerializer
-    authentication_classes = (CsrfExemptSessionAuthentication, BasicAuthentication)

@@ -14,6 +14,7 @@ export default class Registration extends React.Component {
       switch(status) {
       case "CREATEUSER_SUCCESS":
         this.setState({step: 2});
+        alert("Successfull registration");
         break;
       case "CREATEUSER_FAILED":
         alert("Error");

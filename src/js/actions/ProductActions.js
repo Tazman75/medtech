@@ -1,6 +1,6 @@
 // import dispatcher from "../dispatcher";
-import axios from "axios";
 import Reflux from "reflux";
+import { rest } from "./Connect";
 
 var ProductActions = Reflux.createActions({
   productUpdate: {
@@ -10,8 +10,13 @@ var ProductActions = Reflux.createActions({
 });
 
 export function reloadProducts() {
-  axios("/rest/product/").then((data) => {
+  rest.axios.get("product/").then((data) => {
     ProductActions.productUpdate.completed(data.data);
+  }).catch(function (response) {
+    ProductActions.productUpdate.failed({
+      status: response.status,
+      statusText: response.statusText
+    });
   });
 }
 

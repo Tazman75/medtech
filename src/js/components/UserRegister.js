@@ -1,18 +1,14 @@
 import React from "react";
+import reactMixin from "react-mixin";
 import update     from "react-addons-update";
 import BasicInput from "../components/BasicInput";
 import * as UA from "../actions/UserActions";
+var LinkedStateMixin = require("react-addons-linked-state-mixin");
 
 export default class UserRegister extends React.Component {
   constructor() {
     super();
     this.register = this.register.bind(this);
-    this.emailChange = this.emailChange.bind(this);
-    this.usernameChange = this.usernameChange.bind(this);
-    this.passwordChange = this.passwordChange.bind(this);
-    this.firstNameChange = this.firstNameChange.bind(this);
-    this.lastNameChange = this.lastNameChange.bind(this);
-    this.retypePasswordChange = this.retypePasswordChange.bind(this);
 
     this.state = this.getState();
   }
@@ -25,40 +21,6 @@ export default class UserRegister extends React.Component {
       first_name: "",
       last_name: ""
     };
-  }
-
-  usernameChange(e) {
-    this.setState(update(this.state, {
-      username: {$set: e.target.value}
-    }));
-  }
-
-  firstNameChange(e) {
-    this.setState(update(this.state, {
-      first_name: {$set: e.target.value}
-    }));
-  }
-
-  lastNameChange(e) {
-    this.setState(update(this.state, {
-      last_name: {$set: e.target.value}
-    }));
-  }
-
-
-  passwordChange(e) {
-    this.setState(update(this.state, {
-      password: {$set: e.target.value}
-    }));
-  }
-
-  retypePasswordChange(e) {
-  }
-
-  emailChange(email) {
-    this.setState(update(this.state, {
-      email: {$set: email.target.value}
-    }));
   }
 
   register(e) {
@@ -75,37 +37,37 @@ export default class UserRegister extends React.Component {
           <div class="form-group">
           <label class="control-label col-md-3">Username:</label>
           <div class="input-group col-md-7">
-            <BasicInput name="username" type="text" size="40" onChange={this.usernameChange}/>
+            <input valueLink={this.linkState("username")} type="text" size="40"></input>
           </div>
           </div>
           <div class="form-group">
           <label class="control-label col-md-3">Email:</label>
           <div class="input-group col-md-7">
-            <BasicInput name="email" type="text" size="40" onChange={this.emailChange}/>
+            <input valueLink={this.linkState("email")} type="text" size="40"></input>
           </div>
           </div>
           <div class="form-group">
           <label class="control-label col-md-3">Password:</label>
           <div class="input-group col-md-7">
-            <BasicInput name="password" type="password" size="40" onChange={this.passwordChange}/>
+            <input valueLink={this.linkState("password")} type="password" size="40"></input>
           </div>
           </div>
           <div class="form-group">
           <label class="control-label col-md-3">Confirm Password:</label>
           <div class="input-group col-md-7">
-            <BasicInput name="confirm_password" type="password" size="40" onChange={this.retypePasswordChange}/>
+            <input valueLink={this.linkState("confirm_password")} type="password" size="40"></input>
           </div>
           </div>
           <div class="form-group">
           <label class="control-label col-md-3">First Name:</label>
           <div class="input-group col-md-7">
-            <BasicInput name="first_name" type="text" size="40" onChange={this.firstNameChange}/>
+            <input valueLink={this.linkState("first_name")} type="text" size="40"></input>
           </div>
           </div>
           <div class="form-group">
           <label class="control-label col-md-3">Last Name:</label>
           <div class="input-group col-md-7">
-            <BasicInput name="last_name" type="text" size="40" onChange={this.lastNameChange}/>
+            <input valueLink={this.linkState("last_name")} type="text" size="40"></input>
           </div>
           </div>
           <button type="submit" class="btn btn-primary">Register</button>
@@ -115,3 +77,5 @@ export default class UserRegister extends React.Component {
     );
   }
 }
+
+reactMixin(UserRegister.prototype, LinkedStateMixin);

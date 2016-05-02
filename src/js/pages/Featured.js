@@ -3,37 +3,45 @@ import React from "react";
 
 import Feature from "../components/Feature";
 import ProductsListing from "../components/ProductsListing";
-import ProductStore from "../stores/ProductStore";
+import UserStore from "../stores/UserStore";
 import * as PA from "../actions/ProductActions";
+import { states } from "../stores/StoreStates";
+var { PRODUCT_UPDATE_SUCCESS, PRODUCT_UPDATE_FAILED } = states;
 
 export default class Featured extends React.Component {
   constructor() {
     super();
     this.getProducts = this.getProducts.bind(this);
-    const products = ProductStore.getProducts();
+    const products = UserStore.getProducts();
     this.state = {
       products: products
     };
     this.refreshProducts();
+    console.log('con',this.state);
   }
 
   getProducts() {
     this.setState({
-      products: ProductStore.getProducts()
+      products: UserStore.getProducts()
     });
   }
 
   refreshProducts() {
+    console.log('reload...');
     PA.reloadProducts();
   }
 
   componentWillMount() {
     this.getProducts();
-    ProductStore.listen((status) => this.getProducts());
+    UserStore.listen((status) => {
+      if ((status == PRODUCT_UPDATE_SUCCESS) || (status === PRODUCT_UPDATE_FAILED)) {
+        this.getProducts();
+      }
+    });
   }
 
   componentWillUnmount() {
-    ProductStore.stopListeningToAll();
+    UserStore.stopListeningToAll();
   }
 
   render() {

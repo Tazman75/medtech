@@ -6,6 +6,8 @@ var LinkedStateMixin = require("react-addons-linked-state-mixin");
 import * as UA from "../actions/UserActions";
 import UserStore from "../stores/UserStore";
 import { Link } from "react-router";
+import { states } from "../stores/StoreStates";
+var { LOGIN_USER_SUCCESS, LOGOUT_USER_SUCCESS } = states;
 
 export default class Login extends React.Component {
   constructor() {
@@ -25,10 +27,10 @@ export default class Login extends React.Component {
   componentWillMount() {
     UserStore.listen((status) => {
       switch(status) {
-      case "ONLOGINUSER_SUCCESS":
+      case LOGIN_USER_SUCCESS:
         this.setState({login: 1});
         break;
-      case "ONLOGOUTUSER_SUCCESS":
+      case LOGOUT_USER_SUCCESS:
         this.state.username = "";
         this.state.password = "";
         this.setState({

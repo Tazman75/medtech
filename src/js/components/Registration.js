@@ -1,6 +1,8 @@
 import React from "react";
 import UserRegister from "./UserRegister";
 import UserStore from "../stores/UserStore";
+import { states } from "../stores/StoreStates";
+var { CREATE_USER_SUCCESS, CREATE_USER_FAILED } = states;
 
 export default class Registration extends React.Component {
   constructor() {
@@ -12,11 +14,11 @@ export default class Registration extends React.Component {
   componentWillMount() {
     UserStore.listen((status) => {
       switch(status) {
-      case "CREATEUSER_SUCCESS":
+      case CREATE_USER_SUCCESS:
         this.setState({step: 2});
         alert("Successfull registration");
         break;
-      case "CREATEUSER_FAILED":
+      case CREATE_USER_FAILED:
         alert("Error");
         break;
       }

@@ -4,7 +4,6 @@ import React from "react";
 import Feature from "../components/Feature";
 import ProductsListing from "../components/ProductsListing";
 import UserStore from "../stores/UserStore";
-import * as PA from "../actions/ProductActions";
 import { states } from "../stores/StoreStates";
 var { PRODUCT_UPDATE_SUCCESS, PRODUCT_UPDATE_FAILED } = states;
 
@@ -16,19 +15,12 @@ export default class Featured extends React.Component {
     this.state = {
       products: products
     };
-    this.refreshProducts();
-    console.log('con',this.state);
   }
 
   getProducts() {
     this.setState({
       products: UserStore.getProducts()
     });
-  }
-
-  refreshProducts() {
-    console.log('reload...');
-    PA.reloadProducts();
   }
 
   componentWillMount() {

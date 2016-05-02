@@ -1,13 +1,14 @@
 import axios from "axios";
-import cookie from "react-cookie";
+// import cookie from "react-cookie";
 
 class Rest {
   constructor() {
-    this.setToken(cookie.load("token"));
+    // this.setToken(cookie.load("token"));
+    this.setToken("");
   }
 
   setToken(token) {
-    cookie.save("token", token, { path: "/" });
+    // cookie.save("token", token, { path: "/" });
     let ref = {
       baseURL: "/rest/",
       timeout: 1000,
@@ -16,7 +17,7 @@ class Rest {
     this.axios = axios.create(ref);
   }
   resetToken(token) {
-    cookie.remove("token");
+    // cookie.remove("token");
   }
 }
 

@@ -30,12 +30,15 @@ var UserStore = Reflux.createStore({
     this.trigger(states.CREATE_USER_FAILED);
   },
   onLoginUserCompleted: function(data) {
+    console.log('settoken', data.data.key);
     rest.setToken(data.data.key);
     this.trigger(states.LOGIN_USER_SUCCESS);
   },
   onLogoutUserCompleted: function() {
     rest.resetToken();
     this.trigger(states.LOGOUT_USER_SUCCESS);
+    _state["products"] = [];
+    this.trigger(states.PRODUCT_UPDATE_SUCCESS);
   },
 
   getProducts: function() {

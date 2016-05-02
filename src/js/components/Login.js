@@ -1,6 +1,5 @@
 import React from "react";
 import update     from "react-addons-update";
-import cookie from "react-cookie";
 import reactMixin from "react-mixin";
 var LinkedStateMixin = require("react-addons-linked-state-mixin");
 import * as UA from "../actions/UserActions";
@@ -17,23 +16,19 @@ export default class Login extends React.Component {
     this.register = this.register.bind(this);
 
     this.state = {};
-    let token = cookie.load("token");
-    if ( token === "undefined") {
-      this.state.login = 0;
-    } else {
-      this.state.login = 1;
-    }
   }
   componentWillMount() {
     UserStore.listen((status) => {
       switch(status) {
       case LOGIN_USER_SUCCESS:
-        this.setState({login: 1});
+        this.setState({
+          login: 1
+        });
         break;
       case LOGOUT_USER_SUCCESS:
-        this.state.username = "";
-        this.state.password = "";
         this.setState({
+          username: "",
+          password: "",
           login: 0
         });
         break;

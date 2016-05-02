@@ -2,6 +2,7 @@
 import Reflux from "reflux";
 import UserActions from "../actions/UserActions";
 import ProductActions from "../actions/ProductActions";
+import SystemActions from "../actions/SystemActions";
 import { rest } from "../actions/Connect";
 import { states } from "./StoreStates";
 
@@ -10,7 +11,10 @@ var _state = {
   users: []
 };
 var UserStore = Reflux.createStore({
-  listenables: [UserActions, ProductActions],
+  listenables: [UserActions, ProductActions, SystemActions],
+  onInit: function() {
+    console.log("init");
+  },
   onProductUpdateCompleted: function(products) {
     _state["products"] = products;
     this.trigger(states.PRODUCT_UPDATE_SUCCESS);

@@ -25,6 +25,7 @@
     "react-dom": "^0.14.6",
     "react-mixin": "^2.0.2",
     "react-router": "^1.0.3",
+    "react-select": "^0.9.1",
     "reflux": "^0.4.0",
     "webpack": "^1.12.9",
     "webpack-dev-server": "^1.14.1"

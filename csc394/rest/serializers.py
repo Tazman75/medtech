@@ -31,31 +31,31 @@ class UserSerializer(serializers.ModelSerializer):
 class GroupSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = md.Group
-        fields = ('url', 'name')
+        fields = ('id','url', 'name')
 
 
 class CompanySerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = md.Company
-        fields = ('name', 'description', 'address', 'url', 'size')
+        fields = ('id', 'name', 'description', 'address', 'url', 'size')
 
 
 class MessageThreadSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = md.MessageThread
-        fields = ('user', 'product', 'name')
+        fields = ('id','user', 'product', 'name')
 
 
 class MessageSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = md.Message
-        fields = ('thread', 'user')
+        fields = ('id','thread', 'user')
 
 
 class ProductGroupSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = md.ProductGroup
-        fields = ('name', )
+        fields = ('id','name', )
 
 
 class ProductSerializer(serializers.HyperlinkedModelSerializer):
@@ -67,10 +67,10 @@ class ProductSerializer(serializers.HyperlinkedModelSerializer):
 class UserStorySerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = md.UserStory
-        fields = ('product', 'description')
+        fields = ('id','product', 'description')
 
 
 class EvaluationSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = md.Evaluation
-        fields = ('url', 'product', 'user', 'rank', 'comments')
+        fields = ('id','url', 'product', 'user', 'rank', 'comments')

@@ -142,6 +142,9 @@ class CompanyViewSet(viewsets.ModelViewSet):
     queryset = md.Company.objects.all()
     serializer_class = sz.CompanySerializer
 
+    permission_classes = (permissions.AllowAny, )
+    authentication_classes = (CsrfExemptSessionAuthentication, BasicAuthentication)
+
 
 class MessageThreadViewSet(viewsets.ModelViewSet):
     """

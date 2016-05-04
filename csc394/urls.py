@@ -19,7 +19,7 @@ from django.conf.urls import url, include
 from django.conf import settings
 from django.conf.urls.static import static
 from django.views.generic.base import TemplateView
-
+from django.contrib import admin
 from rest_framework import routers
 from csc394.rest import views
 
@@ -34,6 +34,8 @@ router.register(r'product', views.ProductViewSet)
 router.register(r'user_stories', views.UserStoryViewSet)
 router.register(r'evaluation', views.EvaluationViewSet)
 
+from csc394.rest.admin import admin_site
+
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
 urlpatterns = [
@@ -41,6 +43,7 @@ urlpatterns = [
     url(r'^rest/logout/$', views.LogoutView.as_view(), name='rest_logout'),
     url(r'^rest/', include(router.urls)),
     url(r'^login/$', views.LoginView.as_view(), name='rest_login'),
+    url(r'^admin/', admin_site.urls),
     # url(r'^rest-auth/', include('rest_auth.urls')),
     # url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]

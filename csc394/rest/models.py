@@ -38,6 +38,7 @@ class ProductGroup(models.Model):
 
 class Product(models.Model):
     created = models.DateTimeField(auto_now_add=True)
+    company = models.ForeignKey(Company)
     product_group = models.ForeignKey(ProductGroup)
     name = models.CharField(max_length=50)
     description = models.TextField()
@@ -46,6 +47,21 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
+
+class Feature(models.Model):
+    name = models.CharField(max_length=30)
+    desc = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+
+class ProductFeature(models.Model):
+    product = models.ForeignKey(Product)
+    feature = models.ForeignKey(Feature)
+    description = models.CharField(max_length=50)
+
+    def __str__(self):
+        return "{} ({}): {}".format(self.product.name, self.feature.name, self.description)
 
 class UserStory(models.Model):
     product = models.ForeignKey('Product', on_delete=models.CASCADE)

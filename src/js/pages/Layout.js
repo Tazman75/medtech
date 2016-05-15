@@ -17,6 +17,11 @@ var {
   } = states;
 
 export default class Layout extends React.Component {
+  constructor() {
+    super();
+    PA.reloadProducts();
+  }
+  
   componentWillMount() {
     UserStore.listen((status) => {
       switch(status) {

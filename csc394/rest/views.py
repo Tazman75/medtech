@@ -182,6 +182,15 @@ class ProductViewSet(viewsets.ModelViewSet):
 
     # permission_classes = (permissions.IsAuthenticatedOrReadOnly, )
 
+class ProductImageViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows groups to be viewed or edited.
+    """
+    queryset = md.ProductImage.objects.all()
+    serializer_class = sz.ProductImageSerializer
+
+    permission_classes = (permissions.AllowAny, )
+
 
 class UserStoryViewSet(viewsets.ModelViewSet):
     """

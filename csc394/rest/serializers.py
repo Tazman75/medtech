@@ -61,8 +61,12 @@ class ProductGroupSerializer(serializers.HyperlinkedModelSerializer):
 class ProductSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = md.Product
-        fields = ('id', 'product_group', 'url', 'name', 'description', 'cost', 'manufacturer_url')
+        fields = ('id', 'product_group', 'url', 'name', 'description', 'cost', 'main_image', 'manufacturer_url')
 
+class ProductImageSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = md.ProductImage
+        fields = ('id', 'product', 'image')
 
 class UserStorySerializer(serializers.HyperlinkedModelSerializer):
     class Meta:

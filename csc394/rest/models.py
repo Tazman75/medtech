@@ -45,6 +45,7 @@ class Product(models.Model):
     description = models.TextField()
     cost = models.DecimalField(max_digits=8, decimal_places=2)
     manufacturer_url = models.URLField(blank=True)
+    main_image = models.ImageField(upload_to = 'main/%Y/%m/%d',  help_text="Image of the product")
 
     def __str__(self):
         return self.name

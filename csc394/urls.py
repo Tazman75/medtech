@@ -31,6 +31,7 @@ router.register(r'message_threads', views.MessageThreadViewSet)
 router.register(r'message', views.MessageViewSet)
 router.register(r'product_groups', views.ProductGroupViewSet)
 router.register(r'product', views.ProductViewSet)
+router.register(r'product_image', views.ProductImageViewSet)
 router.register(r'user_stories', views.UserStoryViewSet)
 router.register(r'evaluation', views.EvaluationViewSet)
 

@@ -1,15 +1,51 @@
 import React from "react";
 import { IndexLink, Link } from "react-router";
+import SystemActions from "../actions/SystemActions";
 
 export default class Product extends React.Component {
   constructor() {
     super();
   }
 
+  features(features) {
+    var feature_list =  features.map((col, j) => {
+      return (
+        <div key={j}>
+          <dt>{col.feature}</dt>
+          <dd>{col.description}</dd>
+        </div>
+      );
+    });
+    return (
+      <dl class="dl-horizontal">
+      {feature_list}
+      </dl>
+    );
+  }
+
+  componentDidMount() {
+    SystemActions.init();
+  }
+
+  compareSelect(product) {
+    console.log('compare', this.props.id);
+    SystemActions.init();
+    // SystemActions.compareSelect(this.props.id);
+  }
+
+  compareClear() {
+    console.log('compare clear');
+  }
+
+  compareLaunch() {
+    console.log('compare launch');
+  }
+
   render () {
     var props = this.props;
-    var { id, name, description, cost,  manufacturer_url, render_type, main_image } = props;
+    var { id, name, description, cost,  manufacturer_url, render_type, main_image, features } = props;
     // http://placehold.it/300x400
+    function createMarkup() { return {__html: description}; }
 
     switch(render_type) {
     case "detail": {
@@ -20,12 +56,14 @@ export default class Product extends React.Component {
             </div>
             <div class="col-lg-9 col-sm-3 caption" >
                 <h3>{ name }</h3>
-                <p>{ description }</p>
-            </div>
-            <div class="col-lg-3 col-sm-3">
-              <p>Price { cost }</p>
-              <div class="btn btn-primary">Compare</div>
+                <div dangerouslySetInnerHTML={ createMarkup() }></div>
 
+              <h4>Feature List:</h4>
+              { this.features( features ) }
+
+              <div class="btn " onClick={ this.compareSelect.bind(this) }>Select</div>
+              <div class="btn " onClick={ this.compareClear.bind(this) }>Clear</div>
+              <div class="btn btn-primary" onClick={ this.compareLaunch.bind(this) }>Compare</div>
             </div>
         </div>
         );
@@ -39,7 +77,6 @@ export default class Product extends React.Component {
                 </Link>
                 <div class="caption">
                     <h3>{ name }</h3>
-                    <p>{ description }</p>
                     <p>
                         <Link to={ "/products/" + id } class="btn btn-primary">Compare</Link>
                         <a href={ manufacturer_url } class="btn btn-default" target="_blank">Manufacturer Info</a>

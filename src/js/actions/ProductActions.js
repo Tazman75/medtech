@@ -7,8 +7,19 @@ var ProductActions = Reflux.createActions({
   productUpdate: {
     asyncResult: true,
     children: ["progressed"]
-  }
+  },
+  compareSelect: { asyncResult: false },
+  compareClear: {  asyncResult: false }
 });
+
+export function compareSelect(id) {
+  console.log('CC SELECT', id);
+  ProductActions.compareSelect(id);
+}
+
+export function compareClear(id) {
+  ProductActions.compareClear();
+}
 
 export function reloadProducts() {
   axios.get("rest/product/").then((data) => {

@@ -62,7 +62,7 @@ class Feature(models.Model):
         return self.name
 
 class ProductFeature(models.Model):
-    product = models.ForeignKey(Product)
+    product = models.ForeignKey(Product, related_name='features')
     feature = models.ForeignKey(Feature)
     description = models.CharField(max_length=50)
 

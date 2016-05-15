@@ -58,10 +58,37 @@ class ProductGroupSerializer(serializers.HyperlinkedModelSerializer):
         fields = ('id','name', )
 
 
+class FeatureSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = md.Feature
+        fields = ('name', 'desc')
+
+class ProductFeatureSerializer(serializers.HyperlinkedModelSerializer):
+    feature = serializers.SerializerMethodField()
+    # feature = serializers.StringRelatedField(many=True)
+
+    class Meta:
+        model = md.ProductFeature
+        fields = ('feature', 'description')
+
+    def get_feature(self, data):
+        return(data.feature.name)
+
 class ProductSerializer(serializers.HyperlinkedModelSerializer):
+    features = ProductFeatureSerializer(many=True, read_only=True)
+    # features = serializers.StringRelatedField(many=True)
+    # features = serializers.SlugRelatedField(
+    #     many=True,
+    #     read_only=True,
+    #     slug_field='description'
+    #  )
+
     class Meta:
         model = md.Product
-        fields = ('id', 'product_group', 'url', 'name', 'description', 'cost', 'main_image', 'manufacturer_url')
+        fields = ('id', 'product_group', 'url', 'name', 'description', 'cost',
+        'main_image', 'manufacturer_url', 'features')
+
+
 
 class ProductImageSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:

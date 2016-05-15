@@ -45,7 +45,7 @@ export default class Featured extends React.Component {
 
     return (
       <div>
-        <Feature {...feature}/>
+        {/*<Feature {...feature}/>*/}
         <ProductsListing products={products}/>
       </div>
     );

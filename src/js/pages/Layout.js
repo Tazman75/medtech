@@ -21,7 +21,7 @@ export default class Layout extends React.Component {
     super();
     PA.reloadProducts();
   }
-  
+
   componentWillMount() {
     UserStore.listen((status) => {
       switch(status) {

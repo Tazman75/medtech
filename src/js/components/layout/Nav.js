@@ -13,10 +13,10 @@ export default class DropDown extends React.Component {
 
     return (
       <li class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">Products <span class="caret"></span></a>
+        {/*<a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">Products <span class="caret"></span></a>
         <ul class="dropdown-menu" aria-labelledby="themes">
           { cat_list }
-        </ul>
+        </ul>*/}
       </li>
     );
   }

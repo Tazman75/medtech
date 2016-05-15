@@ -28,6 +28,12 @@ var UserStore = Reflux.createStore({
     _state.products = [];
     this.trigger(states.PRODUCT_UPDATE_FAILED);
   },
+  onCompareSelect: function(id) {
+    console.log('CSELECT', id);
+  },
+  onCompareClear: function() {
+    console.log('CCLEAR');
+  },
   onCreateUserCompleted: function(products) {
     this.trigger(states.CREATE_USER_SUCCESS);
   },

@@ -177,6 +177,9 @@ class ProductViewSet(viewsets.ModelViewSet):
     """
     queryset = md.Product.objects.all()
     serializer_class = sz.ProductSerializer
+
+    permission_classes = (permissions.AllowAny, )
+
     # permission_classes = (permissions.IsAuthenticatedOrReadOnly, )
 
 

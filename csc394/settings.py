@@ -142,3 +142,6 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication',
     )
 }
+
+MEDIA_ROOT = '/home/r/csc394/assets/img'
+MEDIA_URL = '/static/img/'

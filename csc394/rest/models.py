@@ -36,6 +36,7 @@ class ProductGroup(models.Model):
     def __str__(self):
         return self.name
 
+
 class Product(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     company = models.ForeignKey(Company)
@@ -47,6 +48,10 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
+
+class ProductImage(models.Model):
+    product = models.ForeignKey(Product)
+    image = models.ImageField(upload_to = 'photos/%Y/%m/%d')
 
 class Feature(models.Model):
     name = models.CharField(max_length=30)

@@ -7,12 +7,17 @@ import { rest } from "../actions/Connect";
 import { states } from "./StoreStates";
 import update     from "react-addons-update";
 
+
 var _state = {
   products: [],
   users: []
 };
+
 var UserStore = Reflux.createStore({
   listenables: [UserActions, ProductActions, SystemActions],
+  componentWillUnmount: function() {
+    alert("what");
+  },
   onInit: function() {
     console.log("init");
   },

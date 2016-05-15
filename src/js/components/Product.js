@@ -1,6 +1,7 @@
 import React from "react";
 import { IndexLink, Link } from "react-router";
 import SystemActions from "../actions/SystemActions";
+import * as PA from "../actions/ProductActions";
 
 export default class Product extends React.Component {
   constructor() {
@@ -24,17 +25,14 @@ export default class Product extends React.Component {
   }
 
   componentDidMount() {
-    SystemActions.init();
   }
 
   compareSelect(product) {
-    console.log('compare', this.props.id);
-    SystemActions.init();
-    // SystemActions.compareSelect(this.props.id);
+    PA.compareSelect(this.props.id);
   }
 
   compareClear() {
-    console.log('compare clear');
+    PA.compareClear();
   }
 
   compareLaunch() {

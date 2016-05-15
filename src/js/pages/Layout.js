@@ -1,4 +1,5 @@
 import React from "react";
+import Reflux from "reflux";
 import Header from "./Header.js";
 import Featured from "./Featured.js";
 import Footer from "./Footer.js";
@@ -6,7 +7,7 @@ import UserActions from "../actions/UserActions";
 import SystemActions from "../actions/SystemActions";
 import * as UA from "../actions/UserActions";
 import * as PA from "../actions/ProductActions";
-import UserStore from "../stores/UserStore";
+import ProductActions from "../actions/ProductActions";
 import { revStates, states } from "../stores/StoreStates";
 
 
@@ -23,7 +24,7 @@ export default class Layout extends React.Component {
   }
 
   componentWillMount() {
-    UserStore.listen((status) => {
+    this.unsubscribe = UserStore.listen((status) => {
       switch(status) {
       case LOGIN_USER_SUCCESS:
         PA.reloadProducts();
@@ -33,6 +34,10 @@ export default class Layout extends React.Component {
       }
       console.log('status', status, revStates[status]);
     });
+  }
+
+  componentWillUnmount() {
+    this.unsubscribe();
   }
 
   componentDidMount() {
@@ -58,5 +63,7 @@ window.UserStore = UserStore;
 
 window.taz = {
   UA: UA,
-  PA: PA
+  PA: PA,
+  ProductActions: ProductActions,
+  Reflux: Reflux
 };

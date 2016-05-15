@@ -3,6 +3,20 @@ import Reflux from "reflux";
 import { rest } from "./Connect";
 import axios from "axios";
 
+console.log("EventHijack");
+var EventEmitter = require('events').EventEmitter;
+function DebugEventEmitter() {
+  var realEmitter = new EventEmitter();
+  var origEmit = realEmitter.emit;
+  realEmitter.emit = function () {
+    console.log('emitting', arguments);
+    return origEmit.apply(realEmitter, arguments);
+  };
+  return realEmitter;
+}
+Reflux.setEventEmitter(DebugEventEmitter);
+
+
 var ProductActions = Reflux.createActions({
   productUpdate: {
     asyncResult: true,
@@ -13,7 +27,6 @@ var ProductActions = Reflux.createActions({
 });
 
 export function compareSelect(id) {
-  console.log('CC SELECT', id);
   ProductActions.compareSelect(id);
 }
 

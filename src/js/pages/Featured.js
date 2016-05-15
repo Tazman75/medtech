@@ -25,7 +25,7 @@ export default class Featured extends React.Component {
 
   componentWillMount() {
     this.getProducts();
-    UserStore.listen((status) => {
+    this.unsubscribe = UserStore.listen((status) => {
       if ((status == PRODUCT_UPDATE_SUCCESS) || (status === PRODUCT_UPDATE_FAILED)) {
         this.getProducts();
       }
@@ -33,7 +33,7 @@ export default class Featured extends React.Component {
   }
 
   componentWillUnmount() {
-    UserStore.stopListeningToAll();
+    this.unsubscribe();
   }
 
   render() {

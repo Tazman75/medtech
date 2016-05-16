@@ -1,5 +1,6 @@
 
 import Reflux from "reflux";
+import _ from "lodash";
 import UserActions from "../actions/UserActions";
 import ProductActions from "../actions/ProductActions";
 import SystemActions from "../actions/SystemActions";
@@ -9,14 +10,15 @@ import update     from "react-addons-update";
 
 
 var _state = {
+  comparison: [4, 5],
   products: [],
   users: []
 };
 
 var UserStore = Reflux.createStore({
   listenables: [UserActions, ProductActions, SystemActions],
-  componentWillUnmount: function() {
-    alert("what");
+  _debugState: function() {
+    return _state;
   },
   onInit: function() {
     console.log("init");
@@ -25,6 +27,7 @@ var UserStore = Reflux.createStore({
     _state.companies = companies;
     this.trigger(states.COMPANY_UPDATE_SUCCESS);
   },
+
   onProductUpdateCompleted: function(products) {
     _state.products = products;
     this.trigger(states.PRODUCT_UPDATE_SUCCESS);
@@ -34,10 +37,12 @@ var UserStore = Reflux.createStore({
     this.trigger(states.PRODUCT_UPDATE_FAILED);
   },
   onCompareSelect: function(id) {
-    console.log('CSELECT', id);
+    if (! _state.comparison.includes(id)) {
+      _state.comparison.push(id);
+    }
   },
   onCompareClear: function() {
-    console.log('CCLEAR');
+    _state.comparison = [];
   },
   onCreateUserCompleted: function(products) {
     this.trigger(states.CREATE_USER_SUCCESS);
@@ -66,6 +71,45 @@ var UserStore = Reflux.createStore({
   getProduct: function(product_id) {
     var filterProducts = _state.products.filter((i) => { return i.id == product_id; });
     return filterProducts[0];
+  },
+  getComparison: function() {
+    //Get the Products
+    let products = _state.comparison.map(
+      (product_id) => {
+        return this.getProduct(product_id);
+      }
+    );
+
+    //get features, and feature by product
+    var productFeatures = {};
+    var features = {};
+    products.forEach((p) =>  {
+      productFeatures[p.id] = _.indexBy(p.features, "feature");
+      p.features.forEach((f) => {
+        features[f.feature] = 1;
+      });
+    });
+
+    //Calc pivot
+    var results = {};
+    _.forOwn(features, (value, feature) => {
+      results[feature] = [];
+    });
+
+    _.forOwn(productFeatures, (features, productId) => {
+      _.forOwn(features, function(ignore, feature) {
+        if (_.has(features, feature)) {
+          results[feature].push(features[feature].description);
+        } else {
+          results[feature].push("N/A");
+        }
+      });
+    });
+
+    return {
+      products: products,
+      comparison: results
+    }
   }
 });
 

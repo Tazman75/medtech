@@ -4,6 +4,7 @@ import Header from "./Header.js";
 import Featured from "./Featured.js";
 import Footer from "./Footer.js";
 import UserActions from "../actions/UserActions";
+import UserStore from "../stores/UserStore";
 import SystemActions from "../actions/SystemActions";
 import * as UA from "../actions/UserActions";
 import * as PA from "../actions/ProductActions";

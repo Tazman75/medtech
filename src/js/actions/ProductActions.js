@@ -14,7 +14,7 @@ function DebugEventEmitter() {
   };
   return realEmitter;
 }
-Reflux.setEventEmitter(DebugEventEmitter);
+// Reflux.setEventEmitter(DebugEventEmitter);
 
 
 var ProductActions = Reflux.createActions({

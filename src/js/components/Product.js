@@ -61,7 +61,8 @@ export default class Product extends React.Component {
 
               <div class="btn " onClick={ this.compareSelect.bind(this) }>Select</div>
               <div class="btn " onClick={ this.compareClear.bind(this) }>Clear</div>
-              <div class="btn btn-primary" onClick={ this.compareLaunch.bind(this) }>Compare</div>
+              {/*<div class="btn btn-primary" onClick={ this.compareLaunch.bind(this) }>Compare</div>*/}
+              <Link class='btn btn-primary' to="/compare" >Compare</Link>
             </div>
         </div>
         );

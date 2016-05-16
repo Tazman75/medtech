@@ -96,7 +96,9 @@ var UserStore = Reflux.createStore({
       results[feature] = [];
     });
 
+    var productDefs = [];
     _.forOwn(productFeatures, (features, productId) => {
+      productDefs.push(this.getProduct(productId));
       _.forOwn(features, function(ignore, feature) {
         if (_.has(features, feature)) {
           results[feature].push(features[feature].description);
@@ -107,7 +109,7 @@ var UserStore = Reflux.createStore({
     });
 
     return {
-      products: products,
+      products: productDefs,
       comparison: results
     }
   }

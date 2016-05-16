@@ -77,7 +77,7 @@ export default class Product extends React.Component {
                 <div class="caption">
                     <h3>{ name }</h3>
                     <p>
-                        <Link to={ "/products/" + id } class="btn btn-primary">Compare</Link>
+                        {/*<Link to={ "/products/" + id } class="btn btn-primary">Compare</Link>*/}
                         <a href={ manufacturer_url } class="btn btn-default" target="_blank">Manufacturer Info</a>
                     </p>
                 </div>

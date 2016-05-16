@@ -6,17 +6,26 @@ export default class Compare extends React.Component {
   render () {
     let compare = UserStore.getComparison();
 
+    var fmt = "col-md-3";
     var results = [];
-    console.log('help');
+    var row = [];
+    row.push((<div class={fmt}><strong>Feature</strong></div>));
+    compare.products.forEach((v) => {
+      row.push((<div class={fmt}><strong>{v.name}</strong></div>));
+    });
+    results.push((<div class="row">{row}</div>));
 
     _.forOwn(compare.comparison, (values, feature) => {
       var row = [];
-      row.push((<div class="col-md-4">{feature}</div>));
-      values.forEach((v) => row.push(<div class="col-md-4">{v}</div>));
+      row.push((<div class={fmt}>{feature}</div>));
+      values.forEach((v) => row.push(<div class={fmt}>{v}</div>));
       results.push((<div class="row">{row}</div>));
     });
     return (
-      <div>{results}</div>
+      <div class="jumbotron">
+        <h3>Feature Comparison</h3>
+        {results}
+      </div>
     );
   }
 }

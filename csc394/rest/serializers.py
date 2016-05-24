@@ -65,7 +65,6 @@ class FeatureSerializer(serializers.HyperlinkedModelSerializer):
 
 class ProductFeatureSerializer(serializers.HyperlinkedModelSerializer):
     feature = serializers.SerializerMethodField()
-    # feature = serializers.StringRelatedField(many=True)
 
     class Meta:
         model = md.ProductFeature
@@ -76,19 +75,17 @@ class ProductFeatureSerializer(serializers.HyperlinkedModelSerializer):
 
 class ProductSerializer(serializers.HyperlinkedModelSerializer):
     features = ProductFeatureSerializer(many=True, read_only=True)
-    # features = serializers.StringRelatedField(many=True)
-    # features = serializers.SlugRelatedField(
-    #     many=True,
-    #     read_only=True,
-    #     slug_field='description'
-    #  )
+
+    points = serializers.SlugRelatedField(
+        many=True,
+        read_only=True,
+        slug_field='point'
+     )
 
     class Meta:
         model = md.Product
         fields = ('id', 'product_group', 'url', 'name', 'description', 'cost',
-        'main_image', 'manufacturer_url', 'features')
-
-
+        'main_image', 'manufacturer_url', 'features', 'points')
 
 class ProductImageSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:

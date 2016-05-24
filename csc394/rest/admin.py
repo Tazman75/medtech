@@ -11,12 +11,17 @@ class ProductFeatureInline(admin.TabularInline):
     model = md.ProductFeature
     fields = (('feature', 'description'),)
 
+class ProductPointInline(admin.TabularInline):
+    model = md.ProductPoint
+    fields = ('point',)
+
 class InlineImage(admin.TabularInline):
     model = md.ProductImage
 
 class ProductAdmin(admin.ModelAdmin):
     empty_value_display = '-empty-'
     inlines = [
+        ProductPointInline,
         InlineImage,
         ProductFeatureInline,
     ]

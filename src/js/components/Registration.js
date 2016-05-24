@@ -19,7 +19,6 @@ export default class Registration extends React.Component {
         alert("Successfull registration");
         break;
       case CREATE_USER_FAILED:
-        alert("Error");
         break;
       }
       console.log("state", this.state);

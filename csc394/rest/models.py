@@ -50,6 +50,10 @@ class Product(models.Model):
     def __str__(self):
         return self.name
 
+class ProductPoint(models.Model):
+    product = models.ForeignKey(Product, related_name='points')
+    point = models.CharField(max_length=100)
+
 class ProductImage(models.Model):
     product = models.ForeignKey(Product)
     image = models.ImageField(upload_to = 'photos/%Y/%m/%d')

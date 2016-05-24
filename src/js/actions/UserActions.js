@@ -42,8 +42,10 @@ export function loginUser(userData) {
   axios.post("/login/",
     userData
   ).then((data) => {
+    console.log('then');
     UserActions.loginUser.completed(data);
   }).catch(function (response) {
+    console.log('catch');
     UserActions.loginUser.failed({
       status: response.status,
       statusText: response.statusText

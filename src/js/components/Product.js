@@ -41,8 +41,15 @@ export default class Product extends React.Component {
 
   render () {
     var props = this.props;
-    var { id, name, description, cost,  manufacturer_url, render_type, main_image, features } = props;
+    console.log('props', props);
+    var { id, name, description, cost,  manufacturer_url, render_type, main_image, features, points } = props;
     // http://placehold.it/300x400
+    if (points === undefined) {
+      return (<div></div>);
+    }
+    const points_html = points.map((point, i) => { return (
+      <li>{point}</li>
+    );});
     function createMarkup() { return {__html: description}; }
 
     switch(render_type) {
@@ -54,15 +61,19 @@ export default class Product extends React.Component {
             </div>
             <div class="col-lg-9 col-sm-3 caption" >
                 <h3>{ name }</h3>
-                <div dangerouslySetInnerHTML={ createMarkup() }></div>
+                {/*<div dangerouslySetInnerHTML={ createMarkup() }></div>*/}
+                <ul>
+                  { points_html }
+                </ul>
+
 
               <h4>Feature List:</h4>
               { this.features( features ) }
 
               <div class="btn " onClick={ this.compareSelect.bind(this) }>Select</div>
               <div class="btn " onClick={ this.compareClear.bind(this) }>Clear</div>
-              {/*<div class="btn btn-primary" onClick={ this.compareLaunch.bind(this) }>Compare</div>*/}
               <Link class='btn btn-primary' to="/compare" >Compare</Link>
+              <p class="help-block">For feature comparison two or three products, and click compare.</p>
             </div>
         </div>
         );

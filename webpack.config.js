@@ -24,6 +24,7 @@ module.exports = {
   },
   output: {
     path: path.resolve('./assets/'),
+    publicPath: "/static/",
     filename: 'client.min.js'
     // filename: '[name]-[hash].js'
   },
@@ -36,4 +37,20 @@ module.exports = {
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.optimize.UglifyJsPlugin({ mangle: false, sourcemap: false }),
   ],
+  devServer: {
+    proxy: [{
+      path: '/rest/*',
+      target: 'http://192.168.99.100'
+    },
+    {
+      path: '/static/*',
+      target: 'http://192.168.99.100'
+    },
+    {
+      path: '/login/*',
+      target: 'http://192.168.99.100'
+    }
+
+    ],
+  }
 };

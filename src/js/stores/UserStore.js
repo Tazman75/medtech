@@ -21,7 +21,7 @@ var UserStore = Reflux.createStore({
     return _state;
   },
   onInit: function() {
-    console.log("init");
+    this.trigger(states.INIT_STORE);
   },
   onCompanyUpdateCompleted: function(companies) {
     _state.companies = companies;
@@ -54,6 +54,9 @@ var UserStore = Reflux.createStore({
     // console.log('settoken', data.data.key);
     rest.setToken(data.data.key);
     this.trigger(states.LOGIN_USER_SUCCESS);
+  },
+  onLoginUserFailed: function(data) {
+    this.trigger(states.LOGIN_USER_FAILED);
   },
   onLogoutUserCompleted: function() {
     rest.resetToken();

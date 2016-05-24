@@ -14,18 +14,8 @@ class Companies extends React.Component {
     this.state = {};
   }
   componentWillMount() {
-    UserStore.listen((status) => {
-      switch(status) {
-      case LOGIN_USER_SUCCESS:
-        PA.reloadProducts();
-        break;
-      case LOGOUT_USER_SUCCESS:
-        break;
-      }
-      console.log('status', status, revStates[status]);
-    });
   }
-  
+
   render () {
     var companies = UserStore.getCompanies();
     var options = companies.map(y => {return {value: y.id, label: y.name};});
@@ -47,8 +37,6 @@ export default class UserRegister extends React.Component {
     super();
     this.register = this.register.bind(this);
     this.state = this.getState();
-
-    console.log('help');
   }
 
   getState() {

@@ -38,14 +38,14 @@ export default class Featured extends React.Component {
 
   render() {
     var feature = {
-      title: "Special Product!",
-      description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa, ipsam, eligendi, in quo sunt possimus non incidunt odit vero aliquid similique quaerat nam nobis illo aspernatur vitae fugiat numquam repellat."
+      title: "     Fitbit",
+      description: "My Goal is Simple: Be a Healthy!"
     };
     const { products } = this.state;
 
     return (
       <div>
-        {/*<Feature {...feature}/>*/}
+        <Feature {...feature}/>
         <ProductsListing products={products}/>
       </div>
     );

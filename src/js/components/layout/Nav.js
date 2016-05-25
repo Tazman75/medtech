@@ -47,7 +47,9 @@ export default class Nav extends React.Component {
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <Link to="/" class="navbar-brand">{ this.state.title }</Link>
+      <Link to="/">
+      <img class="medtech-brand" src="img/logo2.png" alt={ this.state.title }/>
+      </Link>
       <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>

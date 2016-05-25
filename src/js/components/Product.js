@@ -36,12 +36,10 @@ export default class Product extends React.Component {
   }
 
   compareLaunch() {
-    console.log('compare launch');
   }
 
   render () {
     var props = this.props;
-    console.log('props', props);
     var { id, name, description, cost,  manufacturer_url, render_type, main_image, features, points } = props;
     // http://placehold.it/300x400
     if (points === undefined) {
@@ -69,9 +67,12 @@ export default class Product extends React.Component {
 
               <h4>Feature List:</h4>
               { this.features( features ) }
+              <p>
+              <a href={ manufacturer_url } class="btn btn-default" target="_blank">Manufacturer Info</a>
+              </p>
 
-              <div class="btn " onClick={ this.compareSelect.bind(this) }>Select</div>
-              <div class="btn " onClick={ this.compareClear.bind(this) }>Clear</div>
+              <div class="btn btn-default " onClick={ this.compareSelect.bind(this) }>Select</div>
+              <div class="btn btn-default" onClick={ this.compareClear.bind(this) }>Clear</div>
               <Link class='btn btn-primary' to="/compare" >Compare</Link>
               <p class="help-block">For feature comparison two or three products, and click compare.</p>
             </div>
@@ -83,13 +84,11 @@ export default class Product extends React.Component {
         <div class="col-md-5 col-sm-6 hero-feature">
             <div class="thumbnail">
                 <Link to={ "/products/" + id }>
-                  <img src={ main_image } alt="" height="150" width="100"/>
+                  <img class="show" src={ main_image } alt="" />
                 </Link>
                 <div class="caption">
                     <h3>{ name }</h3>
                     <p>
-                        {/*<Link to={ "/products/" + id } class="btn btn-primary">Compare</Link>*/}
-                        <a href={ manufacturer_url } class="btn btn-default" target="_blank">Manufacturer Info</a>
                     </p>
                 </div>
             </div>

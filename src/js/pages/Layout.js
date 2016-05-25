@@ -45,7 +45,6 @@ export default class Layout extends React.Component {
         this._addNotification("Create User Failed", "warning");
         break;
       }
-      console.log('status', status, revStates[status]);
     });
   }
 

@@ -1,3 +1,8 @@
+require("expose?$!expose?jQuery!jquery");
+require("bootstrap-webpack");
+require("../css/style.css");
+require("../css/basic.css");
+
 import React from "react";
 import ReactDOM from "react-dom";
 import Layout from "./pages/Layout";
